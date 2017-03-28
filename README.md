@@ -9,5 +9,7 @@ Executing with no flags runs the script with the default values.
 -l is used to specify a username for login.
 -n is used to search for the IP using Nmap (Requires root).
 
+Designed for Debian, so results may vary between distros.
+
 Chmod +x and cp/mv the script into /usr/bin for easy access.
 
