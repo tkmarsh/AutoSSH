@@ -2,9 +2,8 @@
  
 #Enter default Pi details here
 #These are used if no flags are supplied
-username="[login]"
-mac="[device MAC address]"
-
+username="[default login]"
+mac="[default device MAC address]"
 
 while getopts ":m:l:n" opt; do
   case $opt in
@@ -24,9 +23,16 @@ while getopts ":m:l:n" opt; do
       ;;
       
     n)
-    	echo "Scanning for IP via Nmap requires root, please enter your password:"
-    	ip=$(sudo nmap -sP -n 100.75.151.* | grep -i -B 2 7c:dd:90:b1:00:83 |  grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b")
-    	echo $ip
+     if sudo -n true 2>/dev/null; then 
+       echo -e "Scanning for IP via Nmap.\nPlease wait..."
+    else
+       echo "Scanning for IP via Nmap requires root, please enter your password:"
+       sudo -v
+       echo "Please wait..."
+    fi
+
+    	localip=$(/sbin/ifconfig wlan0 | grep 'inet addr' | cut -d: -f2 | awk '{print $1}' | cut -c1-11)"*"
+    	ip=$(sudo nmap -sP -n $localip | grep -i -B 2 7c:dd:90:b1:00:83 |  grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b")
     	if [[ $ip =~ ^([0-9]{1,3}\.){3}[0-9]{1,3}+$ ]]; then
   	   echo "Successfully found IP via Nmap scan."
  	   ssh="ssh "$ip" -l "$username
