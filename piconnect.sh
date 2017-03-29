@@ -48,7 +48,7 @@ while getopts ":m:l:n" opt; do
       
     \?)
       echo "Invalid option: -$OPTARG"
-      echo -e "Usage:\n [-m | Mac Address] [-l | login]"
+      echo -e "Usage:\n [-m | Mac Address] [-l | login] [-n nmap scan for IP]"
       exit 2
       ;;
   esac
