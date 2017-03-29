@@ -15,6 +15,8 @@ Executing with no flags runs the script with the default values.
 -n is used to search for the IP using Nmap (Requires root).
 ```
 
+-n is slower and requies root to run, but is needed if the ARP cache doesn't contain the IP.
+
 
 Designed for Debian, so results may vary between distros.
 
