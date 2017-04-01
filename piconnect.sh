@@ -13,7 +13,7 @@ while getopts ":m:l:n" opt; do
        	 mac=$OPTARG
        else
        	 echo "Error: Invalid MAC Address."
-       	 echo -e "Usage:\n [-m | Mac Address] [-l | login] [-n nmap scan for IP]"
+         echo -e "Usage:\n [-m (Mac Address) | specify Mac address] [-l (login) | specify login] [-n |Nmap scan]
        	 exit 1
         fi
       ;;
@@ -23,17 +23,16 @@ while getopts ":m:l:n" opt; do
       ;;
       
     n)
-    
-    if sudo -n true 2>/dev/null; then 
+     if sudo -n true 2>/dev/null; then 
        echo -e "Scanning for IP via Nmap.\nPlease wait..."
-    else
+     else
        echo "Scanning for IP via Nmap requires root, please enter your password:"
        sudo -v
        echo "Please wait..."
-    fi
+     fi
 
-    	deviceip=$(/sbin/ifconfig wlan0 | grep 'inet addr' | cut -d: -f2 | awk '{print $1}' | grep -E -o "([0-9]{1,3}[\.]){2}[0-9]{1,3}.")"*"
-    	ip=$(sudo nmap -sP -n $deviceip | grep -i -B 2 7c:dd:90:b1:00:83 |  grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b")
+    	localip=$(/sbin/ifconfig wlan0 | grep 'inet addr' | cut -d: -f2 | awk '{print $1}' | grep -E -o "([0-9]{1,3}[\.]){2}[0-9]{1,3}.")"*"
+    	ip=$(sudo nmap -sP -n $localip | grep -i -B 2 7c:dd:90:b1:00:83 |  grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b")
     	if [[ $ip =~ ^([0-9]{1,3}\.){3}[0-9]{1,3}+$ ]]; then
   	   echo "Successfully found IP via Nmap scan."
  	   ssh="ssh "$ip" -l "$username
@@ -49,7 +48,7 @@ while getopts ":m:l:n" opt; do
       
     \?)
       echo "Invalid option: -$OPTARG"
-      echo -e "Usage:\n [-m | Mac Address] [-l | login]"
+      echo -e "Usage:\n [-m (Mac Address) | specify Mac address] [-l (login) | specify login] [-n |Nmap scan]"
       exit 2
       ;;
   esac
