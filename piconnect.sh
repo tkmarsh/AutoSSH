@@ -13,8 +13,8 @@ while getopts ":m:l:n" opt; do
        	 mac=$OPTARG
        else
        	 echo "Error: Invalid MAC Address."
-         echo -e "Usage:\n [-m (Mac Address) | specify Mac address] [-l (login) | specify login] [-n |Nmap scan]
-       	 exit 1
+         echo -e "Usage:\n [-m (Mac Address) | specify Mac address] [-l (login) | specify login] [-n |Nmap scan]"
+	 exit 1
         fi
       ;;
     
