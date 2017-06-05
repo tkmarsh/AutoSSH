@@ -24,3 +24,5 @@ Sudo is required to run the nmap scan.
 
 Chmod +x and cp/mv the script into /usr/bin for easy access.
 
+You can find the MAC address of the devices ethernet and wifi interfaces by running `ifconfig` and checking the HWaddr field.
+
