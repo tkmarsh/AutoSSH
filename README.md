@@ -1,4 +1,4 @@
-# PiConnect
+# AutoSSH
 A simple bash script to automatically ssh into your Raspberry Pi or any other device, using one of two methods:
 
 - Standard method checks the ARP cache for an IP associated with the devices MAC address.
