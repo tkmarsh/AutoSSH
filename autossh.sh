@@ -1,8 +1,8 @@
 #!/bin/bash
  
-#Enter default Pi details here
+#Enter default device details here
 #These are used if no flags are supplied
-username="[default login]"
+username="[default user login]"
 mac="[default device MAC address]"
 
 while getopts ":m:l:n" opt; do
@@ -36,7 +36,7 @@ while getopts ":m:l:n" opt; do
     	if [[ $ip =~ ^([0-9]{1,3}\.){3}[0-9]{1,3}+$ ]]; then
   	   echo "Successfully found IP via Nmap scan."
  	   ssh="ssh "$ip" -l "$username
- 	   echo "Connecting to Raspberry Pi via ssh at" $ip "as" $username"."
+ 	   echo "Connecting to" $ip "as" $username"."
  	   eval $ssh
 	else
   	   echo "Error: Failed to find host, may be offline."
@@ -58,7 +58,7 @@ ip=$(ip neighbour | grep $mac | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b")
 if [[ $ip =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
   echo "Successfully found IP."
   ssh="ssh "$ip" -l "$username
-  echo "Connecting to Raspberry Pi via ssh at" $ip "as" $username"."
+  echo "Connecting to" $ip "as" $username"."
  eval $ssh
 else
   echo -e "Error: Failed to find host, may be offline."
