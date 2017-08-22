@@ -1,5 +1,7 @@
 # AutoSSH
-A simple bash script to automatically ssh into your Raspberry Pi or any other device, using one of two methods:
+A simple bash script to automatically ssh into your devices, using a MAC address instead of an IP.
+
+There are two methods used in this script to achieve this:
 
 - Standard method checks the ARP cache for an IP associated with the devices MAC address.
 
