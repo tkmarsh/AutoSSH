@@ -31,7 +31,7 @@ while getopts ":m:l:n" opt; do
        echo "Please wait..."
      fi
 
-    	localip=$(/sbin/ifconfig wlan0 | grep 'inet addr' | cut -d: -f2 | awk '{print $1}' | grep -E -o "([0-9]{1,3}[\.]){2}[0-9]{1,3}.")"*"
+    	localip=$(hostname -I | awk '{print $1}' | grep -E -o "([0-9]{1,3}[\.]){2}[0-9]{1,3}.")"*"
     	ip=$(sudo nmap -sP -n $localip | grep -i -B 2 7c:dd:90:b1:00:83 |  grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b")
     	if [[ $ip =~ ^([0-9]{1,3}\.){3}[0-9]{1,3}+$ ]]; then
   	   echo "Successfully found IP via Nmap scan."
